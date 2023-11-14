@@ -1,10 +1,18 @@
 'use client'
+import { z } from 'zod'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
+
+import { storageService } from '@lib/storageService'
+
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+
 import { InputField } from '@components/Input'
 import { Button } from '@components/Button'
 import { Tooltip } from '@components/Tooltip'
+
+import { GoogleBtn } from './googleBtn'
 
 const schema = z
 	.object({
@@ -17,6 +25,7 @@ const schema = z
 		path: ['confirm']
 	})
 export const SignIn = () => {
+	const router = useRouter()
 	const {
 		register,
 		handleSubmit,
@@ -28,7 +37,14 @@ export const SignIn = () => {
 		mode: 'onChange'
 	})
 	const onSubmit = handleSubmit(async (values: z.infer<typeof schema>) => {
+		const res = await axios.post('http://localhost:4200/api/auth/login', {
+			email: values.email,
+			hashedPassword: values.password
+		})
 		reset()
+		storageService.setStorage('token', res.data.accessToken)
+		storageService.setStorage('userId', res.data.user.id)
+		if (res.status === 200) router.push('/')
 	})
 	return (
 		<form
@@ -67,6 +83,7 @@ export const SignIn = () => {
 					</Button>
 				</Tooltip>
 			</div>
+			<GoogleBtn />
 		</form>
 	)
 }

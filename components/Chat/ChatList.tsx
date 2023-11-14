@@ -1,6 +1,7 @@
 import { SkeletonContactList } from '@components/Skeleton'
 import { WrapperContacts } from '@components/wrapper'
 import { HeaderContacts } from '@components/Header'
+import { ContactListItem } from '@components/ContactList/ContactListItem'
 
 export const ChatList = () => {
 	return (
@@ -12,6 +13,7 @@ export const ChatList = () => {
 			/>
 			<WrapperContacts>
 				<SkeletonContactList />
+				<ContactListItem item={{} as any} />
 			</WrapperContacts>
 		</div>
 	)

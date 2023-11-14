@@ -5,7 +5,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { FieldError } from 'react-hook-form'
 
 type inputVariant = 'basic' | 'primary' | 'secondary' | 'outline'
-type inputType = 'password' | 'text' | 'email'
+type inputType = 'password' | 'text' | 'email' | 'file'
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 	className?: string
 	variant?: inputVariant

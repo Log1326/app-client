@@ -10,16 +10,6 @@ export const ContactList = () => {
 			<HeaderContacts title={'Contact list'} content={'Add new user'} />
 			<WrapperContacts>
 				<SkeletonContactList />
-				<SkeletonContactList />
-				<SkeletonContactList />
-				<SkeletonContactList />
-				<SkeletonContactList />
-				<SkeletonContactList />
-				<SkeletonContactList />
-				<ContactListItem item={{} as any} />
-				<ContactListItem item={{} as any} />
-				<ContactListItem item={{} as any} />
-				<ContactListItem item={{} as any} />
 				<ContactListItem item={{} as any} />
 			</WrapperContacts>
 		</div>
