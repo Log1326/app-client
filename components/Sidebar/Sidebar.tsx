@@ -10,6 +10,7 @@ import { CiLogout } from 'react-icons/ci'
 
 import { SidebarItem } from './SidebarItem'
 import { Avatar } from '@components/Avatar'
+import { authService } from '@lib/api'
 
 export interface SidebarDetails {
 	label: string
@@ -20,7 +21,7 @@ export interface SidebarDetails {
 }
 export const Sidebar = () => {
 	const pathname = usePathname()
-	const handleLogOut = () => {}
+	const handleLogOut = async () => await authService.logout()
 	const SidebarMenu = useMemo<SidebarDetails[]>(
 		() => [
 			{
@@ -37,7 +38,7 @@ export const Sidebar = () => {
 			},
 			{
 				label: 'Leave',
-				href: '#',
+				href: '/auth/sign-in',
 				icon: CiLogout,
 				onClick: handleLogOut
 			}

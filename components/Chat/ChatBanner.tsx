@@ -1,17 +1,16 @@
 'use client'
-import Image from 'next/image'
-import img from '../../public/robot.gif'
+// import img from '../../public/robot.gif'
 
 export const ChatBanner = () => {
 	return (
 		<section className='grow grid place-content-center'>
-			<Image
-				src={img}
-				alt={'image'}
-				width={450}
-				height={450}
-				className='object-contain'
-			/>
+			{/*<Image*/}
+			{/*	src={img}*/}
+			{/*	alt={'image'}*/}
+			{/*	width={450}*/}
+			{/*	height={450}*/}
+			{/*	className='object-contain'*/}
+			{/*/>*/}
 			<p className='text-3xl text-gray-600 text-center cursor-default select-none'>
 				Welcome to this chat!
 			</p>

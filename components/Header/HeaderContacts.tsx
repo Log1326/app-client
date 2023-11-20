@@ -16,7 +16,6 @@ export const HeaderContacts: React.FC<HeaderContactsProps> = ({
 	tooltipClassName
 }) => {
 	const [isOpen, setIsOpen] = useState(false)
-
 	const handleClick = () => setIsOpen(true)
 	return (
 		<>

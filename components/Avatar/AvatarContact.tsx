@@ -1,7 +1,6 @@
 'use client'
 import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
-import { usePathname } from 'next/navigation'
 
 type Size = 'tiny' | 'small' | 'medium' | 'large' | 'extraLarge'
 interface AvatarProps {
@@ -13,7 +12,6 @@ interface AvatarProps {
 }
 export const AvatarContact: React.FC<AvatarProps> = props => {
 	const { className, src, size = 'small', label, online } = props
-	const pathname = usePathname()
 	const imgSize: Record<Size, string> = {
 		tiny: 'w-[20px] h-[20px]',
 		small: 'w-[40px] h-[40px]',
@@ -30,14 +28,7 @@ export const AvatarContact: React.FC<AvatarProps> = props => {
 	}
 	return (
 		<div>
-			<div
-				className={twMerge(
-					'relative',
-					imgSize[size],
-					className,
-					pathname === '/profile' && 'bg-sky-300 p-2 rounded-full'
-				)}
-			>
+			<div className={twMerge('relative', imgSize[size], className)}>
 				{online && (
 					<span
 						className={twMerge(

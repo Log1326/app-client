@@ -1,12 +1,13 @@
+type StorageType = 'token' | 'userId'
 export const storageService = {
-	setStorage(key: string, item: string) {
+	setStorage(key: StorageType, item: string) {
 		if (typeof window !== 'undefined') localStorage.setItem(key, item)
 	},
-	removeStorage(key: string) {
+	removeStorage(key: StorageType) {
 		if (typeof window !== 'undefined') localStorage.removeItem(key)
 	},
-	getStorage(key: string) {
-		if (typeof window !== 'undefined') localStorage.getItem(key)
+	getStorage(key: StorageType) {
+		if (typeof window !== 'undefined') return localStorage.getItem(key)
 	},
 	clearLocalStorages() {
 		if (typeof window !== 'undefined') localStorage.clear()

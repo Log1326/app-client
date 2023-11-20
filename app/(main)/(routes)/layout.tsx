@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { Sidebar } from '../../../components/Sidebar/Sidebar'
+import { Sidebar } from '@components/Sidebar'
 
 export const metadata: Metadata = {
 	title: 'Chat',
 	description: 'Chat Desc'
 }
 
-export default function layout({ children }: { children: React.ReactNode }) {
+const Layout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<>
 			<Sidebar />
@@ -14,3 +14,4 @@ export default function layout({ children }: { children: React.ReactNode }) {
 		</>
 	)
 }
+export default Layout

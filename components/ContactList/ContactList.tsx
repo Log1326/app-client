@@ -1,4 +1,3 @@
-'use client'
 import { SkeletonContactList } from '@components/Skeleton'
 import { WrapperContacts } from '@components/wrapper'
 import { HeaderContacts } from '@components/Header'
