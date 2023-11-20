@@ -1,10 +1,12 @@
 import './globals.css'
 
-import { Open_Sans } from 'next/font/google'
 import { Metadata } from 'next'
+import { Open_Sans } from 'next/font/google'
+
 import NextTopLoader from 'nextjs-toploader'
-import { StoreProvider } from '@/providers/store/StoreProvider'
-import { ReactNode } from 'react'
+
+import { StoreProvider } from '@/providers/store'
+import { AuthProvider } from '@/providers/auth'
 
 const inter = Open_Sans({ subsets: ['latin'] })
 
@@ -21,7 +23,11 @@ export const metadata: Metadata = {
 		}
 	]
 }
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+	children
+}: {
+	children: React.ReactNode
+}) {
 	return (
 		<html lang='en'>
 			<body className={inter.className}>
@@ -36,11 +42,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 					speed={400}
 					shadow='0 0 10px #2299DD,0 0 5px #2299DD'
 				/>
-				<StoreProvider>
-					<div className='bg-neutral-100 flex flex-row min-h-screen max-h-screen'>
-						{children}
-					</div>
-				</StoreProvider>
+				<div className='bg-neutral-100 flex flex-row min-h-screen max-h-screen'>
+					<StoreProvider>
+						<AuthProvider>{children}</AuthProvider>
+					</StoreProvider>
+				</div>
 			</body>
 		</html>
 	)

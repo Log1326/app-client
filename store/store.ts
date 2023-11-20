@@ -1,16 +1,20 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { _api } from '@store/rtk-api/rtk-api'
+import { apiRtk } from '@store/rtk-api/rtk-api'
 import { userSlice } from '@store/userStore'
+import { toastSlice } from '@store/toastStore'
 
 const rootReducer = combineReducers({
-	[_api.reducerPath]: _api.reducer,
-	userSlice: userSlice.reducer
+	[apiRtk.reducerPath]: apiRtk.reducer,
+	userSlice: userSlice.reducer,
+	toastStore: toastSlice.reducer
 })
 export const store = (initialState = {}) => {
 	return configureStore({
 		reducer: rootReducer,
 		preloadedState: initialState,
-		devTools: process.env.MODE_DEVELOP !== 'production'
+		devTools: process.env.MODE_DEVELOP !== 'production',
+		middleware: getDefaultMiddleware =>
+			getDefaultMiddleware().concat(apiRtk.middleware)
 	})
 }
 export type TypeRootState = ReturnType<typeof rootReducer>
