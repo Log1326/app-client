@@ -8,6 +8,13 @@ import {
 import { authService, baseUrl, RoutePathAuth } from '@lib/api'
 import { storageService } from '@lib/storageService'
 
+interface UpdateUser {
+	firstName?: string
+	lastName?: string
+	picture?: string
+	previousPassword?: string
+	newPassword?: string
+}
 const baseQuery = fetchBaseQuery({
 	baseUrl,
 	credentials: 'include',
@@ -47,6 +54,29 @@ export const apiRtk = createApi({
 	endpoints: build => ({
 		getProfile: build.query<UserProfile, null>({
 			query: () => '/user/profile'
+		}),
+		findUsersByEmailOrPhone: build.mutation<
+			UserProfile[],
+			{ phone?: string; email?: string }
+		>({
+			query: body => ({
+				url: '/user/find-users',
+				method: 'POST',
+				body
+			})
+		}),
+		updateProfile: build.mutation<UserProfile, UpdateUser>({
+			query: body => ({
+				url: '/user/update',
+				method: 'POST',
+				body
+			})
+		}),
+		delProfile: build.query<UserProfile, string>({
+			query: id => ({
+				url: `/user/delete/${id}`,
+				method: 'DELETE'
+			})
 		})
 	})
 })

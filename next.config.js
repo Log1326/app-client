@@ -4,7 +4,12 @@ const nextConfig = {
 		API_URL: process.env.API_URL
 	},
 	images: {
-		domains: ['localhost', 'cxl.com']
+		domains: [
+			'localhost',
+			'cxl.com',
+			'media.wired.com',
+			'd3544la1u8djza.cloudfront.net'
+		]
 	}
 }
 

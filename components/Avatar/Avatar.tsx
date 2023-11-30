@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Tooltip } from '@components/Tooltip'
+import { Side, Tooltip } from '@components/Tooltip'
 import { FC } from 'react'
 
 type Size = 'tiny' | 'small' | 'medium' | 'large' | 'extraLarge'
@@ -14,9 +14,17 @@ interface AvatarProps {
 	className?: string
 	label?: string
 	href: string
+	tooltipSide?: Side
 }
 export const Avatar: FC<AvatarProps> = props => {
-	const { className, src, href, size = 'small', label } = props
+	const {
+		className,
+		src,
+		href,
+		size = 'small',
+		label,
+		tooltipSide = 'right'
+	} = props
 	const pathname = usePathname()
 	const imgSize: Record<Size, string> = {
 		tiny: 'w-[20px] h-[20px]',
@@ -27,7 +35,11 @@ export const Avatar: FC<AvatarProps> = props => {
 	}
 	return (
 		<Link href={href}>
-			<Tooltip content={label || 'avatar'} side='right' className='mt-3 ml-1'>
+			<Tooltip
+				content={label || 'avatar'}
+				side={tooltipSide}
+				className='mt-3 ml-1'
+			>
 				<div
 					className={twMerge(
 						'relative',

@@ -3,10 +3,10 @@ interface UserProfile {
 	firstName: string
 	lastName: string
 	email: string
+	phone: string
 	emailVerified: string
 	picture: string
 	createdAt: string
-	conversations: []
-	seenMessages: []
-	messages: []
+	receiveMessagesId: string[]
+	conversationRoomsIds: string[]
 }

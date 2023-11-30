@@ -1,6 +1,8 @@
 'use client'
 import { usePathname, useRouter } from 'next/navigation'
 import { apiRtk } from '@store/rtk-api/rtk-api'
+import { LoadingPage } from '@components/Loading'
+import { storageService } from '@lib/storageService'
 
 interface AuthProviderProps {
 	children: React.ReactNode
@@ -12,12 +14,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const { data, isLoading, status, error } = apiRtk.useGetProfileQuery(null, {
 		pollingInterval: 60000
 	})
-	// if ((data && pathname === '/auth/sign-in') || pathname === '/auth/sign-up')
-	// 	replace('/')
-	// if (isLoading && status === 'pending') return <LoadingPage />
-	// if (error) {
-	// 	storageService.clearLocalStorages()
-	// 	replace('/auth/sign-in')
-	// }
+	if ((data && pathname === '/auth/sign-in') || pathname === '/auth/sign-up')
+		replace('/')
+	if (isLoading && status === 'pending') return <LoadingPage />
+	if (error) {
+		storageService.clearLocalStorages()
+		replace('/auth/sign-in')
+	}
 	return <>{children}</>
 }

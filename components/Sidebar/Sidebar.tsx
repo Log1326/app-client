@@ -11,6 +11,7 @@ import { CiLogout } from 'react-icons/ci'
 import { SidebarItem } from './SidebarItem'
 import { Avatar } from '@components/Avatar'
 import { authService } from '@lib/api'
+import { apiRtk } from '@store/rtk-api/rtk-api'
 
 export interface SidebarDetails {
 	label: string
@@ -21,6 +22,8 @@ export interface SidebarDetails {
 }
 export const Sidebar = () => {
 	const pathname = usePathname()
+	const { data, isLoading } = apiRtk.useGetProfileQuery(null)
+
 	const handleLogOut = async () => await authService.logout()
 	const SidebarMenu = useMemo<SidebarDetails[]>(
 		() => [
@@ -55,12 +58,14 @@ export const Sidebar = () => {
 				))}
 			</nav>
 			<nav>
-				<Avatar
-					href='/profile'
-					label={'userName'}
-					src={'/icon.jpg'}
-					size='medium'
-				/>
+				{isLoading ? null:  (
+					<Avatar
+						href='/profile'
+						label={`${data?.firstName} ${data?.lastName}`}
+						src={data?.picture || '/icon.jpg'}
+						size='medium'
+					/>
+				)}
 			</nav>
 		</aside>
 	)

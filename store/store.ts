@@ -17,4 +17,5 @@ export const store = (initialState = {}) => {
 			getDefaultMiddleware().concat(apiRtk.middleware)
 	})
 }
+
 export type TypeRootState = ReturnType<typeof rootReducer>

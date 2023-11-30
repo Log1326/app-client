@@ -2,7 +2,7 @@
 
 import { twMerge } from 'tailwind-merge'
 
-type Side = 'left' | 'right' | 'top' | 'bottom'
+export type Side = 'left' | 'right' | 'top' | 'bottom'
 interface TooltipProps {
 	side?: Side
 	children: React.ReactNode
@@ -28,7 +28,7 @@ export const Tooltip: React.FC<TooltipProps> = props => {
 	const handleClick = () => onClick?.()
 	return (
 		<div className='group z-40 relative inline-block'>
-			<div className='px-1' onClick={handleClick}>
+			<div className='px-1 z-50' onClick={handleClick}>
 				{children}
 			</div>
 

@@ -9,6 +9,7 @@ import { useActions } from '@hooks/useActions'
 import { InputField } from '@components/Input'
 import { Tooltip } from '@components/Tooltip'
 import { Button } from '@components/Button'
+import { LoadingPage } from '@components/Loading'
 
 const MAX_FILE_SIZE = 5000000
 const ACCEPTED_IMAGE_TYPES = [
@@ -50,12 +51,12 @@ export const Profile = () => {
 		mode: 'onChange'
 	})
 	const onSubmit = handleSubmit(async (values: z.infer<typeof schema>) => {
-		console.log(values)
 		reset()
 		addToast({ status: 'success', message: 'You are success change.' })
 	})
 	return (
 		<div className='border-l-[2px] grow'>
+			{isLoading && <LoadingPage />}
 			<div className='flex flex-col justify-center items-center w-full h-full'>
 				<AvatarContact
 					size='extraLarge'

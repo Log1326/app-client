@@ -9,33 +9,18 @@ import {
 	WrapperChatUserDetails
 } from '@components/wrapper'
 import { AvatarContact } from '@components/Avatar'
+import { MessageResponse } from '@store/rtk-api/message/types'
+import { LoadingElement } from '@components/Loading'
 
-type User = {
-	fullName: string
-	image: string
-}
-export type TypeMessage = 'text' | 'audio' | 'image'
-export type TypeMessageStatus = 'sent' | 'read' | 'delivered'
-
-type Message = {
-	user: User
-	id: number
-	receiverId: number
-	senderId: number
-	type: TypeMessage
-	message: string
-	messageStatus: TypeMessageStatus
-	createdAt: string
-	totalUnreadMessages?: number
-}
 interface ChatItemProps {
-	message: Message[]
+	messages: MessageResponse[]
+	userId:string
 }
-export const ChatItem: React.FC<ChatItemProps> = ({ message }) => {
+export const ChatItem: React.FC<ChatItemProps> = ({ messages,userId }) => {
 	return (
 		<div className='grow p-2 my-4 overflow-y-auto overscroll-auto'>
-			{message.map(item => {
-				const isSender = item.senderId === 1
+			{messages?.map(item => {
+				const isSender = item.senderId === userId
 				return (
 					<div key={item.id} className='flex flex-col p-4 px-6'>
 						<WrapperChatDirection isSender={isSender}>
@@ -43,17 +28,17 @@ export const ChatItem: React.FC<ChatItemProps> = ({ message }) => {
 								<AvatarContact
 									online={true}
 									size={'medium'}
-									src={item.user.image}
+									src={item.sender.picture}
 								/>
 								<div className='flex flex-col'>
 									<WrapperChatUserDetails isSender={isSender}>
-										<p className='text-xl'>{item.user.fullName}</p>
-										<p className='text-xs text-gray-400'>{item.createdAt}</p>
+										<p className='text-xl'>{item.sender.firstName}</p>
+										<LoadingElement content={item.content} classname='text-xs text-gray-400'/>
 									</WrapperChatUserDetails>
 									<WrapperChatMessageDetails isSender={isSender}>
 										<ChatMessageType
 											messageType={item.type}
-											message={item.message}
+											message={item.content}
 										/>
 										<ChatMessageStatus status={item.messageStatus} />
 									</WrapperChatMessageDetails>
